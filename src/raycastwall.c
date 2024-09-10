@@ -1,6 +1,6 @@
-#include "maze.h"
+#include "../inc/maze.h"
 
-void drawWall(void)
+void drawWalls(SDL_Renderer *renderer)
 {
 	SDL_SetRenderDrawColor(renderer,135, 206, 250, 255); 
 	SDL_RenderClear(renderer);

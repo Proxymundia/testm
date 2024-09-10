@@ -60,9 +60,11 @@ int main(void)
 				quit = true;
 			}
 		}
-	}
 	/*Add functions*/
 	SDL_Delay(16);
+	drawWalls(renderer);
+	SDL_RenderPresent(renderer);
+	}
 	closeSDL(window, renderer);
 	return (0);
 }
