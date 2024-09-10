@@ -18,6 +18,6 @@ int map[MAP_WIDTH][MAP_HEIGHT] =
 
 
 /* Camera parameters */
-double posX = -3.5, posY = -3.5; /* Player Start position */
+double posX = 1.5, posY = 1.5; /* Player Start position */
 double dirX = 1, dirY = 0;  /* Faced starting direction */
 double planeX = 0, planeY = 0.6; /* Camera view  */

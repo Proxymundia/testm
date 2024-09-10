@@ -68,6 +68,7 @@ int main(void)
 	drawWalls(renderer);
 	SDL_RenderPresent(renderer);
 	handleInput();
+	update();
 	}	
 	closeSDL(window, renderer);
 	return (0);

@@ -73,3 +73,6 @@ void drawWalls(SDL_Renderer *renderer)
         SDL_RenderDrawLine(renderer, x, drawStart, x, drawEnd);
     }
 }
+
+void update(void) {
+}
