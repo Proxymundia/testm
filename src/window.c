@@ -44,6 +44,7 @@ int main(void)
 {
 	SDL_Window *window = NULL;
 	SDL_Renderer *renderer = NULL;
+
 	if (!SDL(&window, &renderer))
 	{
 		printf("Initialisation failed\n");
@@ -70,7 +71,11 @@ int main(void)
 	SDL_RenderPresent(renderer);
 	handleInput();
 	update();
+<<<<<<< HEAD
+	}
+=======
 	}	
+>>>>>>> refs/remotes/origin/main
 	closeSDL(window, renderer);
 	return (0);
 }
