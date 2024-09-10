@@ -4,10 +4,8 @@
  * SDL - intializes SDL, creates a window and renderer
  * Return: true in successfull otherwise false
  */
-SDL_Window *window = NULL;
-SDL_Renderer *renderer = NULL;
 
-bool SDL(void)
+bool SDL(SDL_Window **window, SDL_Renderer **renderer)
 {
 	/*Initialise SDL*/
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -17,17 +15,17 @@ bool SDL(void)
 	}
 	else
 		/*Create a window*/
-		window = SDL_CreateWindow("The Maze", SDL_WINDOWPOS_UNDEFINED,
+		*window = SDL_CreateWindow("The Maze", SDL_WINDOWPOS_UNDEFINED,
 				SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-	if (!window)
+	if (!*window)
 	{
 		printf("Could not create window SDL_Error: %s\n", SDL_GetError());
 		return (false);
 	}
 	else
-		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+		*renderer = SDL_CreateRenderer(*window, -1, SDL_RENDERER_ACCELERATED);
 
-	if (!renderer)
+	if (!*renderer)
 	{
 		printf("Could not create renderer SDL Error: %s\n", SDL_GetError());
 		return (false);
@@ -41,7 +39,9 @@ bool SDL(void)
 
 int main(void)
 {
-	if (!SDL())
+	SDL_Window *window = NULL;
+        SDL_Renderer *renderer = NULL;
+	if (!SDL(&window, &renderer))
 	{
 		printf("Initialisation failed\n");
 		return (1);
@@ -63,7 +63,7 @@ int main(void)
 	}
 	/*Add functions*/
 	SDL_Delay(16);
-	closeSDL();
+	closeSDL(window, renderer);
 	return (0);
 }
 
@@ -71,9 +71,8 @@ int main(void)
  * closeSDL - clearup memory
  */
 
-void closeSDL(void)
+void closeSDL(SDL_Window *window, SDL_Renderer *renderer)
 {
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 }
-
