@@ -30,5 +30,6 @@ void closeSDL(SDL_Window *window, SDL_Renderer *renderer);
 void drawWalls(SDL_Renderer *renderer);
 void handleInput(void);
 void rotateCamera(double angle);
+void update(void);
 #endif /* MAZE_H */
 

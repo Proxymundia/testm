@@ -100,7 +100,12 @@ void drawWalls(SDL_Renderer *renderer)
 	}
 }
 
+<<<<<<< HEAD
 void update(void)
 {
 }
 
+=======
+void update(void) {
+}
+>>>>>>> refs/remotes/origin/main
