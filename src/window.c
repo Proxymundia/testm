@@ -1,115 +1,77 @@
 #include "../inc/maze.h"
 
-SDL_Window *gWindow = NULL;
-SDL_Renderer *gRenderer = NULL;
-/* Function prototypes */
-bool init(void);
-int main(int argc, char *args[]);
-
-/*
- * init- Initializes SDL and creates a window
- * Return:true if initialization succeeds, false otherwise.
+/**
+ * SDL - intializes SDL, creates a window and renderer
+ * Return: true in successfull otherwise false
  */
-bool init(void)
-{
-	bool success = true; /* Initialization flag */
+SDL_Window *window = NULL;
+SDL_Renderer *renderer = NULL;
 
-	/* Initialize SDL */
+bool SDL(void)
+{
+	/*Initialise SDL*/
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
-		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
-		success = false;
+		printf("SDL could not initialize SDL_Error: %s\n" , SDL_GetError());
+		return false;
 	}
 	else
+		/*Create a window*/
+		window = SDL_CreateWindow("The Maze", SDL_WINDOWPOS_UNDEFINED,
+				SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+	if (!window)
 	{
-		/* Create window */
-		SDL_Window *gWindow = SDL_CreateWindow(
-				"The Maze",
-				SDL_WINDOWPOS_UNDEFINED,
-				SDL_WINDOWPOS_UNDEFINED,
-				SCREEN_WIDTH,
-				SCREEN_HEIGHT,
-				SDL_WINDOW_SHOWN
-				);
-
-		if (gWindow == NULL)
-		{
-			printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
-			success = false;
-		}
-		else
-		{
-			gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);
-            if (gRenderer == NULL)
-            {
-                printf("Renderer could not be created! SDL_Error: %s\n", SDL_GetError());
-                success = false;
-		}
+		printf("Could not create window SDL_Error: %s\n", SDL_GetError());
+		return false;
 	}
+	else 
+		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-	return (success); /* Parentheses required */
+	if (!renderer)
+	{
+		printf("Could not create renderer SDL Error: %s\n", SDL_GetError());
+		return false;
+	}
+	return true;
 }
 
-/*
- * main - Entry point for the program.
- * @argc: Argument count.
- * @args: Argument vector.
- * Return: 0 on success.
+/**
+ * main - The maze entry point
  */
-int main(int argc, char *args[])
+
+int main()
 {
-	bool quit = false; /* Flag to indicate if the window should close */
-	SDL_Event e; /* Event handler */
-	int maze[MAP_WIDTH * MAP_HEIGHT] = {
-		1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-		1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-    		1, 0, 1, 1, 1, 1, 1, 0, 0, 1,
-   		1, 0, 1, 0, 0, 0, 1, 0, 1, 1,
-    		1, 0, 1, 0, 1, 1, 1, 0, 1, 1,
-    		1, 0, 1, 0, 0, 0, 1, 0, 0, 1,
-    		1, 0, 1, 1, 1, 0, 1, 0, 0, 1,
-    		1, 0, 0, 0, 1, 0, 1, 0, 0, 1,
-    		1, 1, 1, 0, 1, 0, 1, 1, 1, 1,
-    		1, 1, 1, 1, 1, 1, 1, 1, 1, 1
-};
-
-	/* Start up SDL and create window */
-	if (!init())
+	if (!SDL())
 	{
-		printf("Failed to initialize!\n");
+		printf("Initialisation failed\n");
+			return false;
 	}
-	else
+	bool quit = false;
+	SDL_Event e;
+	while (!quit)
 	{
-		/* Event loop */
-		while (!quit)
+		while (SDL_PollEvent(&e) != 0)
+		
 		{
-			/* Handle events on the queue */
-			while (SDL_PollEvent(&e) != 0)
+			if (e.type == SDL_QUIT)
 			{
-				/* User requests quit */
-				if (e.type == SDL_QUIT)
-				{
-					quit = true;
-				}
+				quit = true;
 			}
-
-			SDL_SetRenderDrawColor(gRenderer, 0x00, 0x00, 0x00, 0xFF);
-        		SDL_RenderClear(gRenderer);
-	    // Call raycaster to draw walls
-            		raycaster(maze, false); // Change false to true if you want textures
-
-            // Update screen
-            		SDL_RenderPresent(gRenderer);
 		}
 	}
-
-	/* Quit SDL subsystems */
-	SDL_DestroyRenderer(gRenderer);
-    	SDL_DestroyWindow(gWindow);
-    	gRenderer = NULL;
-    	gWindow = NULL;
-	SDL_Quit();
-
-	return (0); /* Parentheses required */
-	}
+	/*Add functions*/
+	SDL_Delay(16);
+	closeSDL();
+	return true;
 }
+
+/**
+ * closeSDL - clearup memory
+ */
+
+void closeSDL(void)
+{
+	SDL_DestroyWindow(window);
+	SDL_DestroyRenderer(renderer);
+}
+
