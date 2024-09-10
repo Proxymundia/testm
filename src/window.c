@@ -44,6 +44,7 @@ int main(void)
 {
 	SDL_Window *window = NULL;
 	SDL_Renderer *renderer = NULL;
+
 	if (!SDL(&window, &renderer))
 	{
 		printf("Initialisation failed\n");
@@ -68,7 +69,8 @@ int main(void)
 	drawWalls(renderer);
 	SDL_RenderPresent(renderer);
 	handleInput();
-	}	
+	update();
+	}
 	closeSDL(window, renderer);
 	return (0);
 }
