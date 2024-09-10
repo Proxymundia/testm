@@ -2,6 +2,8 @@
 
 /**
  * SDL - intializes SDL, creates a window and renderer
+ * @window: pointer to window
+ * @renderer: pointer to renderer
  * Return: true in successfull otherwise false
  */
 
@@ -35,21 +37,22 @@ bool SDL(SDL_Window **window, SDL_Renderer **renderer)
 
 /**
  * main - The maze entry point
+ * Return: 0 or 1
  */
 
 int main(void)
 {
 	SDL_Window *window = NULL;
-        SDL_Renderer *renderer = NULL;
+	SDL_Renderer *renderer = NULL;
 	if (!SDL(&window, &renderer))
 	{
 		printf("Initialisation failed\n");
 		return (1);
 	}
-	
+
 	bool quit = false;
 	SDL_Event e;
-	
+
 	while (!quit)
 	{
 		while (SDL_PollEvent(&e) != 0)
@@ -69,6 +72,8 @@ int main(void)
 
 /**
  * closeSDL - clearup memory
+ * @window: pointer to window
+ * @renderer: pointer to renderer
  */
 
 void closeSDL(SDL_Window *window, SDL_Renderer *renderer)
