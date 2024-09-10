@@ -28,6 +28,7 @@ extern double planeX, planeY;
 bool SDL(SDL_Window **window, SDL_Renderer **renderer);
 void closeSDL(SDL_Window *window, SDL_Renderer *renderer);
 void drawWalls(SDL_Renderer *renderer);
-
+void handleInput(void);
+void rotateCamera(double angle);
 #endif /* MAZE_H */
 
