@@ -44,7 +44,7 @@ int main()
 	if (!SDL())
 	{
 		printf("Initialisation failed\n");
-			return false;
+			return 1;
 	}
 	bool quit = false;
 	SDL_Event e;
@@ -62,7 +62,7 @@ int main()
 	/*Add functions*/
 	SDL_Delay(16);
 	closeSDL();
-	return true;
+	return 0;
 }
 
 /**
