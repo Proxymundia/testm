@@ -18,7 +18,8 @@ bool SDL(SDL_Window **window, SDL_Renderer **renderer)
 	/*load image for textures*/
 	if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG))
 	{
-		printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
+		printf("SDL_image could not initialize! SDL_image Error: %s\n",
+				IMG_GetError());
 		return (false);
 	}
 	/*Create a window*/

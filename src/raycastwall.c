@@ -8,14 +8,20 @@
 
 void drawWalls(SDL_Renderer *renderer)
 {
-	if (skyTexture) {
+	if (skyTexture)
+	{
 		int w, h;
+
 		SDL_GetRendererOutputSize(renderer, &w, &h);
-		SDL_Rect dstRect = {0, 0, w, h};  // Full screen
+
+		SDL_Rect dstRect = {0, 0, w, h}; /*Full screen*/
+
 		SDL_RenderCopy(renderer, skyTexture, NULL, &dstRect);
-	} else {
-		// Fallback to red if skyTexture is not loaded
-		SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Red color
+	}
+	else
+	{
+		/*Fallback to red if skyTexture is not loaded*/
+		SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); /*Red color*/
 		SDL_RenderClear(renderer);
 	}
 	int x;
@@ -103,39 +109,56 @@ void drawWalls(SDL_Renderer *renderer)
 		if (drawEnd >= SCREEN_HEIGHT)
 			drawEnd = SCREEN_HEIGHT - 1;
 
-		// Calculate texture coordinates
+		/*Calculate texture coordinates*/
 
 		double wallX;
-		if (side == 0) wallX = posY + perpWallDist * rayDirY;
-		else wallX = posX + perpWallDist * rayDirX;
+
+		if (side == 0)
+			wallX = posY + perpWallDist * rayDirY;
+		else
+			wallX = posX + perpWallDist * rayDirX;
 		wallX -= floor(wallX);
-		// Floor position for the floor casting
+		/*Floor position for the floor casting*/
 
 		int texX = (int)(wallX * (double)TEXTURE_WIDTH);
-		if (side == 0 && rayDirX > 0) texX = TEXTURE_WIDTH - texX - 1;
-		if (side == 1 && rayDirY < 0) texX = TEXTURE_WIDTH - texX - 1;
 
-		// Draw the wall with texture
+		if (side == 0 && rayDirX > 0)
+			texX = TEXTURE_WIDTH - texX - 1;
+		if (side == 1 && rayDirY < 0)
+			texX = TEXTURE_WIDTH - texX - 1;
+
+		/*Draw the wall with texture*/
 		SDL_Rect srcRect = { texX, 0, 1, TEXTURE_HEIGHT };
+
 		SDL_Rect dstRect = { x, drawStart, 1, drawEnd - drawStart };
+
 		SDL_RenderCopy(renderer, wallTexture, &srcRect, &dstRect);
 
-		// Floor casting
+		/*Floor casting*/
 		double floorXWall, floorYWall;
-		if (side == 0 && rayDirX > 0) {
+
+		if (side == 0 && rayDirX > 0)
+		{
 			floorXWall = mapX;
 			floorYWall = mapY + wallX;
-		} else if (side == 0 && rayDirX < 0) {
+		}
+		else if (side == 0 && rayDirX < 0)
+		{
 			floorXWall = mapX + 1.0;
 			floorYWall = mapY + wallX;
-		} else if (side == 1 && rayDirY > 0) {
+		}
+		else if (side == 1 && rayDirY > 0)
+		{
 			floorXWall = mapX + wallX;
 			floorYWall = mapY;
-		} else {
+		}
+		else
+		{
 			floorXWall = mapX + wallX;
 			floorYWall = mapY + 1.0;
 		}
-		for (int y = drawEnd + 1; y < SCREEN_HEIGHT; y++) {
+		for (int y = drawEnd + 1; y < SCREEN_HEIGHT; y++)
+		{
 			double currentDist = SCREEN_HEIGHT / (2.0 * y - SCREEN_HEIGHT);
 
 			double weight = currentDist / perpWallDist;
@@ -148,6 +171,7 @@ void drawWalls(SDL_Renderer *renderer)
 
 			SDL_Rect floorSrcRect = { floorTexX, floorTexY, 1, 1 };
 			SDL_Rect floorDstRect = { x, y, 1, 1 };
+
 			SDL_RenderCopy(renderer, floorTexture, &floorSrcRect, &floorDstRect);
 		}
 	}

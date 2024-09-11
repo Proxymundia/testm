@@ -3,7 +3,7 @@
 bool showMap = true;
 /**
  * miniMap - displays the mini map
- * @void: function map
+ * @renderer: pointer to render
  * Return: minimap
 */
 
