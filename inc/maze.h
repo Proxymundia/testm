@@ -10,6 +10,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <math.h>
+#include <stdint.h>
 
 
 /*Global Variables*/
@@ -32,6 +33,6 @@ void drawWalls(SDL_Renderer *renderer);
 void handleInput(void);
 void rotateCamera(double angle);
 void update(void);
-void miniMap(void);
+void miniMap(SDL_Renderer *renderer);
 #endif /* MAZE_H */
 

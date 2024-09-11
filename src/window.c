@@ -66,7 +66,7 @@ int main(void)
 		}
 	/*Add functions*/
 	SDL_Delay(16);
-	miniMap();
+	miniMap(renderer);
 	drawWalls(renderer);
 	SDL_RenderPresent(renderer);
 	handleInput();

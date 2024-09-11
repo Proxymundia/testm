@@ -1,14 +1,13 @@
 #include "../inc/maze.h"
 
 bool showMap = true;
-SDL_Renderer *renderer = NULL;
 /**
  * miniMap - displays the mini map
  * @void: function map
  * Return: minimap
 */
 
-void miniMap(void)
+void miniMap(SDL_Renderer *renderer)
 {
 	if (!showMap)
 		return;
