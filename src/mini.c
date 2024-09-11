@@ -1,6 +1,5 @@
 #include "../inc/maze.h"
 
-bool showMap = true;
 /**
  * miniMap - displays the mini map
  * @renderer: pointer to render
@@ -9,9 +8,10 @@ bool showMap = true;
 
 void miniMap(SDL_Renderer *renderer)
 {
+	bool showMap = true;
+
 	if (!showMap)
 		return;
-
 	/*Minimap settings*/
 	int mapScale = 10; /*Scale down the map for the minimap*/
 	int offsetX = 10; /*Offset from the left edge of the screen*/
@@ -24,7 +24,6 @@ void miniMap(SDL_Renderer *renderer)
 		{
 			SDL_Rect rect = { offsetX + x * mapScale, offsetY +
 				y * mapScale, mapScale, mapScale };
-
 			if (map[x][y] > 0)
 			{
 				SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); /*Wall color (black)*/
@@ -37,14 +36,11 @@ void miniMap(SDL_Renderer *renderer)
 			SDL_RenderFillRect(renderer, &rect);
 		}
 	}
-
 	/*Draw the player's position*/
 	SDL_Rect playerRect = { offsetX + posX * mapScale - 2,
 		offsetY + posY * mapScale - 2, 4, 4 };
-
-	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); /*Player color (red)*/
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); /*set player color black*/
 	SDL_RenderFillRect(renderer, &playerRect);
-
 	/*Draw the player's line of sight*/
 	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); /*Line of sight (red)*/
 	SDL_RenderDrawLine(renderer,
