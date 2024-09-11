@@ -3,8 +3,8 @@
 
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 800
-#define MAP_WIDTH 11
-#define MAP_HEIGHT 10
+#define MAP_WIDTH 15
+#define MAP_HEIGHT 15
 #define TEXTURE_WIDTH 64
 #define TEXTURE_HEIGHT 64
 
