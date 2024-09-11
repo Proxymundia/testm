@@ -15,10 +15,15 @@ bool SDL(SDL_Window **window, SDL_Renderer **renderer)
 		printf("SDL could not initialize SDL_Error: %s\n", SDL_GetError());
 		return (false);
 	}
-	else
-		/*Create a window*/
-		*window = SDL_CreateWindow("The Maze", SDL_WINDOWPOS_UNDEFINED,
-				SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+	/*load image for textures*/
+	if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG))
+	{
+		printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
+		return (false);
+	}
+	/*Create a window*/
+	*window = SDL_CreateWindow("The Maze", SDL_WINDOWPOS_UNDEFINED,
+			SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 	if (!*window)
 	{
 		printf("Could not create window SDL_Error: %s\n", SDL_GetError());
@@ -50,6 +55,7 @@ int main(void)
 		printf("Initialisation failed\n");
 		return (1);
 	}
+	loadTextures(renderer);
 
 	bool quit = false;
 	SDL_Event e;
@@ -64,13 +70,13 @@ int main(void)
 				quit = true;
 			}
 		}
-	/*Add functions*/
-	SDL_Delay(16);
-	miniMap(renderer);
-	drawWalls(renderer);
-	SDL_RenderPresent(renderer);
-	handleInput();
-	update();
+		/*Add functions*/
+		SDL_Delay(16);
+		drawWalls(renderer);
+		miniMap(renderer);
+		SDL_RenderPresent(renderer);
+		handleInput();
+		update();
 	}
 	closeSDL(window, renderer);
 	return (0);

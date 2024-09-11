@@ -5,17 +5,25 @@
 #define SCREEN_HEIGHT 800
 #define MAP_WIDTH 11
 #define MAP_HEIGHT 10
+#define TEXTURE_WIDTH 64
+#define TEXTURE_HEIGHT 64
 
 #include <SDL2/SDL.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <math.h>
 #include <stdint.h>
+#include <SDL2/SDL_image.h>
 
 
 /*Global Variables*/
 extern SDL_Window *window;
 extern SDL_Renderer *renderer;
+/*texture global variables*/
+
+extern SDL_Texture *skyTexture;
+extern SDL_Texture *wallTexture;
+extern SDL_Texture *floorTexture;
 
 /* Define Map*/
 
@@ -34,5 +42,7 @@ void handleInput(void);
 void rotateCamera(double angle);
 void update(void);
 void miniMap(SDL_Renderer *renderer);
+void loadTextures(SDL_Renderer *renderer);
+
 #endif /* MAZE_H */
 
