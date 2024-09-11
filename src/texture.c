@@ -3,11 +3,10 @@
 /**
  * loadTextures - gives walls textures
  * @renderer: pointer to wall render
- * Return: textured walls
+ * @skyTexture: Pointer to the sky texture
+ * @floorTexture: Pointer to the floor texture
+ * @wallTexture: Pointer to the wall texture
  */
-SDL_Texture *skyTexture = NULL;
-SDL_Texture *floorTexture = NULL;
-SDL_Texture *wallTexture = NULL;
 
 void loadTextures(SDL_Renderer *renderer, SDL_Texture **skyTexture, SDL_Texture **floorTexture, SDL_Texture **wallTexture)
 {

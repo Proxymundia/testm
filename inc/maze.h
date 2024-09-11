@@ -37,7 +37,7 @@ extern bool showMap;
 
 bool SDL(SDL_Window **window, SDL_Renderer **renderer);
 void closeSDL(SDL_Window *window, SDL_Renderer *renderer);
-void drawWalls(SDL_Renderer *renderer);
+void drawWalls(SDL_Renderer *renderer, SDL_Texture *skyTexture, SDL_Texture *wallTexture, SDL_Texture *floorTexture);
 void handleInput();
 void moveForwardBackward(void);
 void rotateLeftRight(void);
