@@ -56,7 +56,7 @@ int main(void)
 		printf("Initialisation failed\n");
 		return (1);
 	}
-	loadTextures(renderer);
+	loadTextures(renderer, &skyTexture, &floorTexture, &wallTexture);
 
 	bool quit = false;
 	SDL_Event e;
@@ -74,11 +74,11 @@ int main(void)
 		}
 		/*Add functions*/
 		SDL_Delay(16);
+		SDL_RenderPresent(renderer);
+
 		drawWalls(renderer);
 		miniMap(renderer);
 		handleInput();
-		SDL_RenderPresent(renderer);
-		SDL_Delay(16);
 		update();
 	}
 	closeSDL(window, renderer);
@@ -95,8 +95,8 @@ void closeSDL(SDL_Window *window, SDL_Renderer *renderer)
 {
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
+	SDL_DestroyTexture(skyTexture);
 	SDL_DestroyTexture(floorTexture);
 	SDL_DestroyTexture(wallTexture);
-	SDL_DestroyTexture(skyTexture);
 	SDL_Quit();
 }

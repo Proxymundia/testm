@@ -22,8 +22,8 @@ extern SDL_Renderer *renderer;
 /*texture global variables*/
 
 extern SDL_Texture *skyTexture;
-extern SDL_Texture *wallTexture;
 extern SDL_Texture *floorTexture;
+extern SDL_Texture *wallTexture;
 
 /* Define Map*/
 
@@ -44,7 +44,7 @@ void rotateLeftRight(void);
 void rotateCamera(double angle);
 void update(void);
 void miniMap(SDL_Renderer *renderer);
-void loadTextures(SDL_Renderer *renderer);
+void loadTextures(SDL_Renderer *renderer, SDL_Texture **skyTexture, SDL_Texture **floorTexture, SDL_Texture **wallTexture);
 
 #endif /* MAZE_H */
 
