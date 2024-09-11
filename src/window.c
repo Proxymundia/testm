@@ -69,13 +69,15 @@ int main(void)
 			{
 				quit = true;
 			}
+
 		}
 		/*Add functions*/
 		SDL_Delay(16);
 		drawWalls(renderer);
 		miniMap(renderer);
-		SDL_RenderPresent(renderer);
 		handleInput();
+		SDL_RenderPresent(renderer);
+		SDL_Delay(16);
 		update();
 	}
 	closeSDL(window, renderer);
@@ -92,4 +94,8 @@ void closeSDL(SDL_Window *window, SDL_Renderer *renderer)
 {
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
+	SDL_DestroyTexture(floorTexture);
+	SDL_DestroyTexture(wallTexture);
+	SDL_DestroyTexture(skyTexture);
+	SDL_Quit();
 }
