@@ -39,6 +39,8 @@ bool SDL(SDL_Window **window, SDL_Renderer **renderer);
 void closeSDL(SDL_Window *window, SDL_Renderer *renderer);
 void drawWalls(SDL_Renderer *renderer);
 void handleInput();
+void moveForwardBackward(void);
+void rotateLeftRight(void);
 void rotateCamera(double angle);
 void update(void);
 void miniMap(SDL_Renderer *renderer);

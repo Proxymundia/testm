@@ -19,15 +19,15 @@ void rotateCamera(double angle)
 }
 
 /**
- * handleInput - actions on directions
+ * moveForwardBackward- allows camera to move fowards or backwards
  */
-void handleInput(void)
+void moveForwardBackward(void)
 {
 	const Uint8 *state = SDL_GetKeyboardState(NULL);
 	double moveSpeed = 0.05;  /*Speed of movement*/
-	double rotSpeed = 0.03;   /*Speed of rotation*/
+
 	/*Move forward (W)*/
-	if (state[SDL_SCANCODE_W])
+	if (state[SDL_SCANCODE_W] || state[SDL_SCANCODE_UP])
 	{
 		double newX = posX + dirX * moveSpeed;
 		double newY = posY + dirY * moveSpeed;
@@ -40,7 +40,7 @@ void handleInput(void)
 	}
 
 	/*Move backward (S)*/
-	if (state[SDL_SCANCODE_S])
+	if (state[SDL_SCANCODE_S] || state[SDL_SCANCODE_DOWN])
 	{
 		double newX = posX - dirX * moveSpeed;
 		double newY = posY - dirY * moveSpeed;
@@ -51,9 +51,18 @@ void handleInput(void)
 		if (map[(int)posX][(int)newY] == 0)
 			posY = newY;
 	}
+}
+/**
+ * rotateLeftRight - allows the camera to rotate either left or right
+*/
+
+void rotateLeftRight(void)
+{
+	const Uint8 *state = SDL_GetKeyboardState(NULL);
+	double rotSpeed = 0.03;   /*Speed of rotation*/
 
 	/*Move left (A)*/
-	if (state[SDL_SCANCODE_A])
+	if (state[SDL_SCANCODE_A] || state[SDL_SCANCODE_LEFT])
 	{
 		double oldDirX = dirX;
 
@@ -66,7 +75,7 @@ void handleInput(void)
 	}
 
 	/*Move right (D)*/
-	if (state[SDL_SCANCODE_D])
+	if (state[SDL_SCANCODE_D] || state[SDL_SCANCODE_RIGHT])
 	{
 		double oldDirX = dirX;
 
@@ -77,4 +86,14 @@ void handleInput(void)
 		planeX = planeX * cos(-rotSpeed) - planeY * sin(-rotSpeed);
 		planeY = oldPlaneX * sin(-rotSpeed) + planeY * cos(-rotSpeed);
 	}
+}
+
+/**
+ * handleInput - handles movement input
+*/
+
+void handleInput(void)
+{
+	moveForwardBackward();
+	rotateLeftRight();
 }
