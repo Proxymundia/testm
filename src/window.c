@@ -71,11 +71,7 @@ int main(void)
 	SDL_RenderPresent(renderer);
 	handleInput();
 	update();
-<<<<<<< HEAD
 	}
-=======
-	}	
->>>>>>> refs/remotes/origin/main
 	closeSDL(window, renderer);
 	return (0);
 }

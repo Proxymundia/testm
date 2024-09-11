@@ -24,6 +24,7 @@ extern int map[MAP_WIDTH][MAP_HEIGHT];
 extern double posX, posY;
 extern double dirX, dirY;
 extern double planeX, planeY;
+extern bool showMap;
 
 bool SDL(SDL_Window **window, SDL_Renderer **renderer);
 void closeSDL(SDL_Window *window, SDL_Renderer *renderer);
@@ -31,5 +32,6 @@ void drawWalls(SDL_Renderer *renderer);
 void handleInput(void);
 void rotateCamera(double angle);
 void update(void);
+void miniMap(void);
 #endif /* MAZE_H */
 
